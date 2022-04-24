@@ -5,6 +5,7 @@ services:
     container_name: code-server
     volumes:
       - ${project_path}:${project_path}
+      - ./conf:/home/coder/.config/code-server
     ports:
       - ${outside_port}:${inside_port}
     healthcheck:

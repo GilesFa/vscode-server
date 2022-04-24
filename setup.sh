@@ -5,9 +5,21 @@ outside_port=80
 inside_port=8080
 PASSWORD=abc123
 
-echo "project_path=/home/${user}/${project}" >> .env
-echo "outside_port=80" >> .env
-echo "inside_port=8080" >> .env
+#環境變數設定
+cat >.env<<EOF 
+project_path=/home/${user}/${project}
+outside_port=${outside_port}
+inside_port=${inside_port}
+EOF
+
+mkdir ./conf
+cat >./conf/config.yaml<<EOF 
+bind-addr: 127.0.0.1:${inside_port}
+auth: password
+cert: false
+password: ${PASSWORD}
+EOF
+
 
 #1. 設定專案目錄路徑與權限
 useradd ${user}
@@ -26,11 +38,11 @@ docker exec -it code-server sudo apt update
 docker exec -it code-server sudo apt-get install python3 python3-pip -y
 docker exec -it code-server pip3 --version
 echo "vscode update & install python3 ok"
-dock
+
 #5. 設定vscode 密碼
-docker exec -it code-server sed -i '/password:/d' .config/code-server/config.yaml
-docker exec -it code-server  bash -c "echo 'password: ${PASSWORD}' >> .config/code-server/config.yaml"
-docker exec -it code-server cat .config/code-server/config.yaml |grep password:
+#docker exec -it code-server sed -i '/password:/d' .config/code-server/config.yaml
+#docker exec -it code-server  bash -c "echo 'password: ${PASSWORD}' >> .config/code-server/config.yaml"
+docker exec -it code-server cat /home/coder/.config/code-server/config.yaml |grep password:
 echo "please copy password"
 
 #6. 重啟docker
