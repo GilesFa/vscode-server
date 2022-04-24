@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  code-server:
+    image: codercom/code-server
+    container_name: code-server
+    volumes:
+      - ${project_path}:${project_path}
+    ports:
+      - ${port}:8080
+    restart: always
+    networks:
+      - code-server
+
+networks:
+  code-server:
