@@ -1,11 +1,13 @@
 #/bin/bash
 user=coder
 project=demo
-port=80
+outside_port=80
+inside_port=8080
 PASSWORD=abc123
 
 echo "project_path=/home/${user}/${project}" >> .env
-echo "port=80" >> .env
+echo "outside_port=80" >> .env
+echo "inside_port=8080" >> .env
 
 #1. 設定專案目錄路徑與權限
 useradd ${user}
@@ -24,8 +26,7 @@ docker exec -it code-server sudo apt update
 docker exec -it code-server sudo apt-get install python3 python3-pip -y
 docker exec -it code-server pip3 --version
 echo "vscode update & install python3 ok"
-
-
+dock
 #5. 設定vscode 密碼
 docker exec -it code-server sed -i '/password:/d' .config/code-server/config.yaml
 docker exec -it code-server  bash -c "echo 'password: ${PASSWORD}' >> .config/code-server/config.yaml"
@@ -34,4 +35,6 @@ echo "please copy password"
 
 #6. 重啟docker
 docker-compose restart
-echo "login web is http://serverip:${port}"
+echo "login web is http://serverip:${outside_port}"
+/usr/bin/sleep 10
+docker-compose ps

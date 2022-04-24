@@ -6,7 +6,13 @@ services:
     volumes:
       - ${project_path}:${project_path}
     ports:
-      - ${port}:8080
+      - ${outside_port}:${inside_port}
+    healthcheck:
+      test: curl --fail http://127.0.0.1:${inside_port} || exit 1
+      interval: 30s
+      retries: 3
+      start_period: 20s
+      timeout: 5s
     restart: always
     networks:
       - code-server
