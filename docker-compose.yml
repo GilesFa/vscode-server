@@ -7,7 +7,7 @@ services:
       - ${project_path}:${project_path}
       - ./conf:/home/coder/.config/code-server
     ports:
-      - ${outside_port}:${inside_port}
+      - ${outside_port}:8080
     healthcheck:
       test: curl --fail http://127.0.0.1:${inside_port} || exit 1
       interval: 30s
