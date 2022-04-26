@@ -30,7 +30,7 @@ echo "set folder ok"
 #2. 建立vscode server容器
 docker pull codercom/code-server
 docker-compose up -d
-docker exec -it code-server sudo chown ${user}:${user} ${project_path}
+docker exec -it code-server sudo chown -R ${user}:${user} ${project_path}
 echo "set contanier ok"
 
 #3. 容器系統更新與安裝python3
