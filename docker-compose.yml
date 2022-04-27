@@ -6,6 +6,7 @@ services:
     volumes:
       - ${project_path}:${project_path}
       - ./conf:/home/coder/.config/code-server
+      - python-lib:/home/coder.local/lib
     ports:
       - ${outside_port}:8080
     healthcheck:
@@ -17,6 +18,9 @@ services:
     restart: always
     networks:
       - code-server
+
+volumes:
+  python-lib:
 
 networks:
   code-server:
