@@ -35,7 +35,9 @@ echo "set contanier ok"
 
 #3. 容器系統更新與安裝python3
 docker exec -it code-server sudo apt-get update -y
-docker exec -it code-server sudo apt-get install python3 pip flask flask_cors -y
+docker exec -it code-server sudo apt-get install python3 -y 
+docker exec -it code-server sudo apt-get install python3-pip -y
+docker exec -it code-server sudo pip install flask flask_cors
 docker exec -it code-server pip --version
 echo "vscode update & install python3 ok"
 
