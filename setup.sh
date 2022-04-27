@@ -50,3 +50,4 @@ docker-compose restart
 echo "login web is http://serverip:${outside_port}"
 /usr/bin/sleep 10
 docker-compose ps
+echo "project folder path: ${project_path}"
