@@ -35,8 +35,8 @@ echo "set contanier ok"
 
 #3. 容器系統更新與安裝python3
 docker exec -it code-server sudo apt update
-docker exec -it code-server sudo apt-get install python3 python3-pip -y
-docker exec -it code-server pip3 --version
+docker exec -it code-server sudo apt-get install python3 pip -y
+docker exec -it code-server pip --version
 echo "vscode update & install python3 ok"
 
 #5. 設定vscode 密碼
